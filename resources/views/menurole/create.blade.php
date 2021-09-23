@@ -59,37 +59,37 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mrc" value="1"> Create
+                        <input type="checkbox" name="mrc" value="1"> Create
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mrr" value="1"> Read
+                        <input type="checkbox" name="mrr" value="1"> Read
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mru" value="1"> Update
+                        <input type="checkbox" name="mru" value="1"> Update
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mrd" value="1"> Delete
+                        <input type="checkbox" name="mrd" value="1"> Delete
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mr01" value="1"> Option 1
+                        <input type="checkbox" name="mr01" value="1"> Option 1
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;
                     <div class="checkbox inline">
                       <label>
-                        <input type="checkbox" nama="mr02" value="1"> Option 2
+                        <input type="checkbox" name="mr02" value="1"> Option 2
                       </label>
                     </div>
                     &nbsp;&nbsp;&nbsp;

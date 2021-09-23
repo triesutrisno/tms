@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Menurole\Menurole;
 use App\Models\Menu\Menu;
 use App\Models\Role\Role;
+use App\Models\Aksesuser\Aksesuser;
 use Illuminate\Http\Request;
 Use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,8 @@ class MenuroleController extends Controller
                         'a.mr02',
                         'a.mr03'
                     )
-                    ->leftjoin('menu as b', 'b.menu_id', '=', 'a.menu_id')                
+                    ->leftjoin('menu as b', 'b.menu_id', '=', 'a.menu_id') 
+                    ->whereNull('a.deleted_at')
                     ->when($status, function ($query, $status) {
                         return $query->where('a.menurole_status', $status);
                     })
@@ -81,6 +83,7 @@ class MenuroleController extends Controller
                'role_nama' => 'required',
         ]);
         $sukses = $error = 0;
+        $datetime = date("Y-m-d H:i:s");
         $mrc = isset($request->mrc) ? $request->mrc : 0;
         $mrr = isset($request->mrr) ? $request->mrr : 0;
         $mru = isset($request->mru) ? $request->mru : 0;
@@ -100,8 +103,37 @@ class MenuroleController extends Controller
                 $request->request->add(['mr02'=>$mr02]);
                 $request->request->add(['mr03'=>$mr03]);
                 
-                Menurole::create($request->all());
-                $sukses++;
+                $menuRole = Menurole::create($request->all());
+                if($menuRole){
+                    $getAkses = DB::table('aksesuser')
+                        ->select('username')
+                        ->where(['aksesuser_status'=>'1', 'role_nama'=>$request->role_nama])
+                        #->whereNull('deleted_at')
+                        ->groupBy('username')
+                        ->get();
+                    foreach($getAkses as $valData){
+                        #dd($valData);
+                        DB::table('aksesuser')
+                        ->insert([
+                            'menu_id' => $val,
+                            'role_nama' => $request->role_nama,
+                            'username' => $valData->username,
+                            'aksesuser_status' => '1',
+                            'auc' => $mrc,
+                            'aur' => $mrr,
+                            'auu' => $mru,
+                            'aud' => $mrd,
+                            'au01' => $mr01,
+                            'au02' => $mr02,
+                            'au03' => $mr03,
+                            'created_at' => $datetime,
+                            #'createBy' => auth()->user()->username
+                        ]);
+                    }
+                    $sukses++;
+                }else{
+                    $error++;
+                }
             }else{
                 $error++;
             }
@@ -151,6 +183,8 @@ class MenuroleController extends Controller
         $mr02 = isset($request->mr02) ? $request->mr02 : 0;
         $mr03 = isset($request->mr03) ? $request->mr03 : 0;
         
+        $datetime = date("Y-m-d H:i:s");
+        
         $request->validate([
                'menu_id' => 'required',
                'role_nama' => 'required',
@@ -161,7 +195,23 @@ class MenuroleController extends Controller
                 ['menurole_status', '=', '1'],
                 ['deleted_at', '=', 'NULL'],
                 ['menurole_id', '!=', $menurole->menurole_id]
-        ])->doesntExist()) { // Cek data apakah sudah ada atau belum di database            
+        ])->doesntExist()) { // Cek data apakah sudah ada atau belum di database             
+            Aksesuser::where(['menu_id'=>$menurole->menu_id, 'role_nama'=>$menurole->role_nama])
+                ->update([                        
+                    'menu_id' => $request->menu_id,
+                    'role_nama' => $request->role_nama,
+                    'aksesuser_status' => $request->menurole_status,
+                    'auc' => $mrc,
+                    'aur' => $mrr,
+                    'auu' => $mru,
+                    'aud' => $mrd,
+                    'au01' => $mr01,
+                    'au02' => $mr02,
+                    'au03' => $mr03,
+                    'updated_at' => $datetime
+            ]);
+            
+                       
             Menurole::where('menurole_id', $menurole->menurole_id)
               ->update([
                   'menu_id' => $request->menu_id,
@@ -175,6 +225,7 @@ class MenuroleController extends Controller
                   'mr02' => $mr02,
                   'mr03' => $mr03,
             ]);
+            
             return redirect('/menurole')->with(['kode'=>'99', 'pesan'=>'Data berhasil diubah !']);
         }else{
             return redirect('/menurole')->with(['kode'=>'98', 'pesan'=>'Data sudah ada !']);
@@ -189,6 +240,7 @@ class MenuroleController extends Controller
      */
     public function destroy(Menurole $menurole)
     {
+        $hapusAkses = DB::table('aksesuser')->where(['menu_id'=>$menurole->menu_id, 'role_nama'=>$menurole->role_nama])->delete();
         Menurole::destroy($menurole->menurole_id);
         return redirect('/menurole')->with(['kode'=>'99', 'pesan'=> 'Data berhasil dihapus !']);   
     }
