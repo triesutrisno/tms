@@ -108,7 +108,19 @@ class UserroleController extends Controller
      */
     public function show(Userrole $userrole)
     {
-        //
+        $hakAkses = DB::table('aksesuser AS a')
+                    ->select('a.username', 'a.role_nama', 'b.menu_id', 'b.menu_nama', 'b.menu_link', 'b.menu_type', 'b.menu_parent', 'b.menu_icon', 'aksesuser_status', 'a.auc', 'a.aur', 'a.auu', 'a.aud', 'a.au01', 'a.au02', 'a.au03')
+                    ->join('menu AS b', ['a.menu_id' => 'b.menu_id'])
+                    ->where([
+                        ['a.aksesuser_status', '=', '1'],
+                        ['b.menu_status', '=', '1'],
+                        ['a.username', '=', $userrole->username],                        
+                        ['a.role_nama', '=', $userrole->role_nama]
+                    ])
+                    ->whereNull('b.deleted_at')
+                    ->orderBy('b.menu_sort', 'ASC')
+                    ->get();
+        return view('userrole.show',['datas'=>$hakAkses]);
     }
 
     /**

@@ -52,22 +52,19 @@ class LoginController extends Controller
                     $success['email'] = $user->email;
                     $request->session()->push('infoUser', $success);
                     
-                    $hakAkses = DB::table('userrole AS a')
-                        ->join('menurole AS b', ['a.role_nama' => 'b.role_nama'])
-                        ->join('menu AS c', 'b.menu_id', '=', 'c.menu_id')
-                        ->select('a.username', 'a.role_nama', 'b.menu_id', 'c.menu_nama', 'c.menu_link', 'c.menu_type', 'c.menu_parent', 'c.menu_icon')
+                    $hakAkses = DB::table('aksesuser AS a')
+                        ->select('a.username', 'a.role_nama', 'b.menu_id', 'b.menu_nama', 'b.menu_link', 'b.menu_type', 'b.menu_parent', 'b.menu_icon', 'a.auc', 'a.aur', 'a.auu', 'a.aud', 'a.au01', 'a.au02', 'a.au03')
+                        ->join('menu AS b', ['a.menu_id' => 'b.menu_id'])
                         ->where([
-                            ['a.userrole_status', '=', '1'],
-                            ['b.menurole_status', '=', '1'],
-                            ['c.menu_status', '=', '1'],
+                            ['a.aksesuser_status', '=', '1'],
+                            ['b.menu_status', '=', '1'],
                             ['a.username', '=', $request->username]
                         ])
                         ->whereNull('b.deleted_at')
-                        ->whereNull('c.deleted_at')
-                        ->orderBy('c.menu_sort', 'ASC')
+                        ->orderBy('b.menu_sort', 'ASC')
                         ->get();
                     #dd($hakAkses);
-                    $dtAkses = [];
+                    $dtAkses = $actionAkses = [];
                     if (!empty($hakAkses)) {
                         foreach ($hakAkses as $key => $val) {
                             $typeAwal = $val->menu_type;
@@ -83,7 +80,7 @@ class LoginController extends Controller
                                 $parent1['menu_nama'] = $val->menu_nama;
                                 $parent1['menu_link'] = $val->menu_link;
                                 $parent1['menu_type'] = $val->menu_type;                                
-                                $parent1['menu_icon'] = $val->menu_icon; 
+                                $parent1['menu_icon'] = $val->menu_icon;
 
                                 $dtAkses[$val->menu_parent]['data1'][$val->menu_id] = $parent1;
                             }else if ($val->menu_type == '3') {
@@ -91,16 +88,31 @@ class LoginController extends Controller
                                 $parent2['menu_nama'] = $val->menu_nama;
                                 $parent2['menu_link'] = $val->menu_link;
                                 $parent2['menu_type'] = $val->menu_type;                                
-                                $parent2['menu_icon'] = $val->menu_icon;              
+                                $parent2['menu_icon'] = $val->menu_icon;
                                 
                                 #$dtParent2[] = $parent2;
                                 #array_merge($dtAkses['1']['data1'],$parent2);
                                 $dtAkses[$idLevel1]['data1'][$val->menu_parent]['data2'][]  = $parent2;
                             }
+                            
+                            
+                            $dtMenu['menu_id'] = $val->menu_id;
+                            $dtMenu['menu_nama'] = $val->menu_nama;
+                            $dtMenu['menu_link'] = $val->menu_link;
+                            $dtMenu['auc']       = $val->auc;
+                            $dtMenu['aur']       = $val->aur;
+                            $dtMenu['auu']       = $val->auu;
+                            $dtMenu['aud']       = $val->aud;
+                            $dtMenu['au01']      = $val->au01;
+                            $dtMenu['au02']      = $val->au02;
+                            $dtMenu['au03']      = $val->au03;
+                            
+                            $actionAkses[] = $dtMenu;
                         }
                     }
                     #dd($dtAkses);
                     $request->session()->put('hakAkses', $dtAkses);
+                    $request->session()->put('actionAkses', $actionAkses);
                     
                     return redirect('/home');
                 }

@@ -62,5 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['auth', 'checkLink:userrole']], function () {
         Route::resource('/userrole', 'App\Http\Controllers\Userrole\UserroleController');
     });
+    
+    Route::group(['middleware' => ['auth', 'checkLink:mmot']], function () {
+        Route::resource('/mmot', 'App\Http\Controllers\Mot\MotController');
+    });
 });
 #Route::get('/', [MainController::class, 'index']);

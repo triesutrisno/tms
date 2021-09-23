@@ -4,9 +4,9 @@
  <!-- page specific plugin style -->
 @endpush
 
-@section('breadcrumb','Menu Role')
-@section('title','Daftar Menu Role')
-@section('subTitle','Merupakan halaman daftar menu role dalam sistem')
+@section('breadcrumb','Master MOT')
+@section('title','Daftar Master MOT')
+@section('subTitle','Merupakan halaman daftar mater mot dalam sistem')
 
 @section('container')
 <!-- Main content -->
@@ -16,14 +16,18 @@
       <div class="box">
         <div class="box-header">
             <div class="clearfix">
-                    <a href="{{url('/menurole')}}" class="btn btn-white btn-primary btn-bold">
-                            <i class="ace-icon fa fa-folder-open-o bigger-120 blue"></i>
-                            Lihat Data
+                @if($hakakses['aur']=='1')
+                    <a href="{{url('/mmot')}}" class="btn btn-white btn-primary btn-bold">
+                        <i class="ace-icon fa fa-folder-open-o bigger-120 blue"></i>
+                        Lihat Data
                     </a>
-                    <a href="{{url('/menurole/create')}}" class="btn btn-white btn-success btn-bold">
+                @endif
+                @if($hakakses['auc']=='1')
+                    <a href="{{url('/mmot/create')}}" class="btn btn-white btn-success btn-bold">
                             <i class="ace-icon glyphicon glyphicon-plus bigger-120 blue"></i>
                             Tambah Data
                     </a>
+                @endif
             </div>
             <br />
             <div class="col-sm-12 col-md-10">
@@ -32,29 +36,13 @@
                       <h3 class="box-title">Cari Data :</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form action="{{ url('/menurole')}}" method="head">
+                        <form action="{{ url('/mmot')}}" method="head">
                         @csrf
                             <!-- text input -->
                             <div class="col-sm-12 col-md-3">
                                 <div class="form-group">
-                                    <label>Nama Menu :</label>
-                                    <input type="text" class="form-control" name="namaMenu">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                                <div class="form-group">
-                                    <label>Nama Role :</label>
-                                    <input type="text" class="form-control" name="namaRole">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-3">
-                                <div class="form-group">
-                                    <label>Status :</label>
-                                    <select name="status" class="form-control">
-                                      <option value="">Silakan Pilih</option>
-                                      <option value="1" {{ $param['status']=='1' ? 'selected' : '' }}>Aktif</option>
-                                      <option value="2"{{ $param['status']=='2' ? 'selected' : '' }}>Tidak Aktif</option>
-                                    </select>
+                                    <label>Kode MOT :</label>
+                                    <input type="text" class="form-control" name="kode">
                                 </div>
                             </div>
                             <div class="box-footer col-sm-12 col-md-12">
@@ -85,16 +73,8 @@
             <thead>
               <tr class="bg-light-blue-gradient">
                 <th width="40" align="center">No</th>
-                <th width="120">Nama Role</th>
-                <th>Nama Menu</th>
-                <th width="20" align="center">Tambah</th>
-                <th width="20" align="center">Lihat</th>
-                <th width="20" align="center">Ubah</th>
-                <th width="20" align="center">Hapus</th>
-                <th width="20" align="center">Opt01</th>
-                <th width="20" align="center">Opt02</th>
-                <th width="20" align="center">Opt03</th>
-                <th width="80" align="center">Status</th>
+                <th width="120">Nama MOT</th>
+                <th>Keterangan</th>
                 <th width="80" align="center">Action</th>
               </tr>
             </thead>
@@ -102,34 +82,22 @@
                 @foreach($datas as $key => $dt)
                 <tr>
                     <td align="center">{{ $datas->firstItem() + $key }}</td>
-                    <td>{{$dt->role_nama}}</td>
-                    <td>{{$dt->menu_nama}}</td>
-                    <td align="center">{{$dt->mrc}}</td>
-                    <td align="center">{{$dt->mrr}}</td>
-                    <td align="center">{{$dt->mru}}</td>
-                    <td align="center">{{$dt->mrd}}</td>
-                    <td align="center">{{$dt->mr01}}</td>
-                    <td align="center">{{$dt->mr02}}</td>
-                    <td align="center">{{$dt->mr03}}</td>
-                    <td align="center">
-                        @if($dt->menurole_status == '1')
-                            <button class="btn btn-xs btn-success">Aktif</button>
-                        @elseif($dt->menurole_status == '2')
-                            <button class="btn btn-xs btn-danger">Tidak Aktif</button>
-                        @else
-                         
-                        @endif
-                    </td>
+                    <td>{{$dt->mtmot}}</td>
+                    <td>{{$dt->mtdesc}}</td>
                     <td>
                         <div class="hidden-sm hidden-xs action-buttons">
-                            <a class="green" href="{{ url('/menurole')}}/{{$dt->menurole_id}}/edit"><i class="ace-icon fa fa-pencil bigger-130"></i></a>                                                                                                
-                            <form action="{{ url('/menurole')}}/{{$dt->menurole_id}}" method="post" class="inline hapus">
+                            @if($hakakses['auu']=='1')
+                            <a class="green" href="{{ url('/mmot')}}/{{$dt->mtmot}}/edit"><i class="ace-icon fa fa-pencil bigger-130"></i></a>
+                            @endif
+                            @if($hakakses['aud']=='1')
+                            <form action="{{ url('/mmot')}}/{{$dt->mtmot}}" method="post" class="inline hapus">
                                 @method('delete')
                                 @csrf
                                 <button class="red btn-link">
                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                 </button>
                             </form>
+                            @endif
                         </div>                                                
                     </td>
                 </tr>

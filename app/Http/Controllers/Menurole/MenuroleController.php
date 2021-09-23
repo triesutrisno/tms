@@ -31,7 +31,14 @@ class MenuroleController extends Controller
                         'a.role_nama',
                         'a.menu_id',
                         'b.menu_nama',
-                        'a.menurole_status'
+                        'a.menurole_status',
+                        'a.mrc',
+                        'a.mrr',
+                        'a.mru',
+                        'a.mrd',
+                        'a.mr01',
+                        'a.mr02',
+                        'a.mr03'
                     )
                     ->leftjoin('menu as b', 'b.menu_id', '=', 'a.menu_id')                
                     ->when($status, function ($query, $status) {

@@ -4,11 +4,11 @@
  <!-- page specific plugin style -->
 @endpush
 
-@section('breadcrumb','Master Role')
-@section('subBreadcrumb','Tambah Master Role')
+@section('breadcrumb','Master MOT')
+@section('subBreadcrumb','Tambah Master MOT')
 @section('link','role')
-@section('title','Tambah Master Role')
-@section('subTitle','Merupakan halaman tambah role dalam sistem')
+@section('title','Tambah Master MOT')
+@section('subTitle','Merupakan halaman tambah mot dalam sistem')
 
 @section('container')
 <!-- Main content -->
@@ -20,29 +20,19 @@
             
         </div><!-- /.box-header -->
         <div class="box-body">
-            <form action="{{ url('/role')}}" method="post" autocomplete="off">
+            <form action="{{ url('/mmot')}}" method="post" autocomplete="off">
             @csrf
                 <!-- text input -->
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
-                        <label for="form-role_nama">Nama Role *</label>
-                        <input type="text" class="form-control" required name='role_nama' id="form-role_nama" maxlength="50" value="{{old('role_nama')}}">
+                        <label for="form-mtmot">Kode MOT *</label>
+                        <input type="text" class="form-control" required name='mtmot' id="form-mtmot" maxlength="10" value="{{old('mtmot')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
-                        <label for="form-role_keterangan">Keterangan</label>
-                        <input type="text" class="form-control" name='role_keterangan' id="form-role_keterangan" maxlength="150" value="{{old('role_keterangan')}}">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                    <div class="form-group">
-                        <label for="form-role_status">Status *</label>
-                        <select class="form-control" required name='role_status' id="form-role_status">
-                            <option  value="">Silakan Pilih</option>
-                            <option value="1">Aktif</option>
-                            <option value="2">Tidak Aktif</option>
-                        </select>
+                        <label for="form-mtdesc">Keterangan</label>
+                        <input type="text" class="form-control" name='mtdesc' id="form-mtdesc" maxlength="40" value="{{old('mtdesc')}}">
                     </div>
                 </div>
                 <div class="box-footer col-sm-12 col-md-12">

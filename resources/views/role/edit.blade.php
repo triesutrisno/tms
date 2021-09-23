@@ -27,13 +27,13 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-role_nama">Nama Role *</label>
-                        <input type="text" class="form-control" required name='role_nama' id="form-role_nama" value="{{$datas->role_nama}}">
+                        <input type="text" class="form-control" required name='role_nama' id="form-role_nama" maxlength="50" value="{{$datas->role_nama}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-role_keterangan">Keterangan</label>
-                        <input type="text" class="form-control" name='role_keterangan' id="form-role_keterangan" value="{{$datas->role_keterangan}}">
+                        <input type="text" class="form-control" name='role_keterangan' id="form-role_keterangan" maxlength="150" value="{{$datas->role_keterangan}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">

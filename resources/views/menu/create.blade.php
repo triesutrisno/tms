@@ -27,19 +27,19 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-menu_nama">Nama Menu *</label>
-                        <input type="text" class="form-control" required name='menu_nama' id="form-menu_nama" value="{{old('menu_nama')}}">
+                        <input type="text" class="form-control" required name='menu_nama' id="form-menu_nama" maxlength="50" value="{{old('menu_nama')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-menu_link">Link</label>
-                        <input type="text" class="form-control" name='menu_link' id="form-menu_link" value="{{old('menu_link')}}">
+                        <input type="text" class="form-control" name='menu_link' id="form-menu_link" maxlength="10" value="{{old('menu_link')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-menu_keterangan">Keterangan</label>
-                        <input type="text" class="form-control" name='menu_keterangan' id="form-menu_keterangan" value="{{old('menu_keterangan')}}">
+                        <input type="text" class="form-control" name='menu_keterangan' id="form-menu_keterangan" maxlength="150" value="{{old('menu_keterangan')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
@@ -77,13 +77,13 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-menu_sort">Urutan</label>
-                        <input type="text" class="form-control" name='menu_sort' id="form-menu_sort" value="{{old('menu_sort')}}">
+                        <input type="text" class="form-control" name='menu_sort' id="form-menu_sort" maxlength="6" value="{{old('menu_sort')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-menu_icon">Icon</label>
-                        <input type="text" class="form-control" name='menu_icon' id="form-menu_sort" value="{{old('menu_icon')}}">
+                        <input type="text" class="form-control" name='menu_icon' id="form-menu_sort" maxlength="30" value="{{old('menu_icon')}}">
                     </div>
                 </div>
                 <div class="box-footer col-sm-12 col-md-12">
