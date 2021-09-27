@@ -66,5 +66,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['auth', 'checkLink:mmot']], function () {
         Route::resource('/mmot', 'App\Http\Controllers\Mot\MotController');
     });
+    
+    Route::group(['middleware' => ['auth', 'checkLink:mtparmada']], function () {
+        Route::resource('/mtparmada', 'App\Http\Controllers\Mtparmada\MtparmadaController');
+    });
 });
 #Route::get('/', [MainController::class, 'index']);

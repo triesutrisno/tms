@@ -6,7 +6,7 @@
 
 @section('breadcrumb','Master MOT')
 @section('subBreadcrumb','Tambah Master MOT')
-@section('link','role')
+@section('link','mmot')
 @section('title','Tambah Master MOT')
 @section('subTitle','Merupakan halaman tambah mot dalam sistem')
 
@@ -31,8 +31,8 @@
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
-                        <label for="form-mtdesc">Keterangan</label>
-                        <input type="text" class="form-control" name='mtdesc' id="form-mtdesc" maxlength="40" value="{{old('mtdesc')}}">
+                        <label for="form-mtdesc">Keterangan *</label>
+                        <input type="text" class="form-control" required name='mtdesc' id="form-mtdesc" maxlength="40" value="{{old('mtdesc')}}">
                     </div>
                 </div>
                 <div class="box-footer col-sm-12 col-md-12">

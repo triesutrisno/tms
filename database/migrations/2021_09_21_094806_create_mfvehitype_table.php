@@ -25,6 +25,7 @@ class CreateMfvehitypeTable extends Migration
             $table->string('vtpuom',3)->nullable();
             $table->decimal('vtcpiece',15,3)->nullable();
             $table->smallInteger('vtnaxl')->nullable();
+            $table->string('vtcby',1)->nullable();
             $table->string('vtcrby',10)->nullable();
             $table->string('vtedby',10)->nullable();
             $table->string('vtdeBy',10)->nullable();

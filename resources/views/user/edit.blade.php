@@ -27,25 +27,25 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-username">Username *</label>
-                        <input type="text" class="form-control" required name='username' id="form-username" value="{{$datas->username}}">
+                        <input type="text" class="form-control" required name='username' id="form-username" maxlength="10" value="{{$datas->username}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-name">Nama *</label>
-                        <input type="text" class="form-control" required name='name' id="form-name" value="{{$datas->name}}">
+                        <input type="text" class="form-control" required name='name' id="form-name" maxlength="150" value="{{$datas->name}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-email">Email </label>
-                        <input type="text" class="form-control" name='email' id="form-email" value="{{$datas->email}}">
+                        <input type="text" class="form-control" name='email' id="form-email" maxlength="150" value="{{$datas->email}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-email">Password *</label>
-                        <input type="password" class="form-control" required name='password' id="form-password" value="{{$datas->password}}">
+                        <input type="password" class="form-control" required name='password' id="form-password" maxlength="150" value="{{$datas->password}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">

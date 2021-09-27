@@ -26,25 +26,25 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-username">Username *</label>
-                        <input type="text" class="form-control" required name='username' id="form-username" value="{{old('username')}}">
+                        <input type="text" class="form-control" required name='username' id="form-username" maxlength="10" value="{{old('username')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-name">Nama *</label>
-                        <input type="text" class="form-control" required name='name' id="form-name" value="{{old('name')}}">
+                        <input type="text" class="form-control" required name='name' id="form-name" maxlength="150" value="{{old('name')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-email">Email </label>
-                        <input type="text" class="form-control" name='email' id="form-email" value="{{old('email')}}">
+                        <input type="text" class="form-control" name='email' id="form-email" maxlength="150" value="{{old('email')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="form-group">
                         <label for="form-password">Password *</label>
-                        <input type="password" class="form-control" required name='passworde' id="form-passworde" value="{{old('passworde')}}">
+                        <input type="password" class="form-control" required name='passworde' id="form-passworde" maxlength="150" value="{{old('passworde')}}">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-7">
