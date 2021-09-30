@@ -8,7 +8,7 @@
 @section('subBreadcrumb','Ubah Master Type Armada')
 @section('link','mtparmada')
 @section('title','Ubah Master Type Armada')
-@section('subTitle','Merupakan halaman ubah type armada dalam sistem')
+@section('subTitle','Merupakan halaman ubah master type armada dalam sistem')
 
 @section('container')
 <!-- Main content -->

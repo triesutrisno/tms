@@ -8,7 +8,7 @@
 @section('subBreadcrumb','Tambah Master Type Armada')
 @section('link','mtparmada')
 @section('title','Tambah Master Type Armada')
-@section('subTitle','Merupakan halaman tambah type armada dalam sistem')
+@section('subTitle','Merupakan halaman tambah master type armada dalam sistem')
 
 @section('container')
 <!-- Main content -->

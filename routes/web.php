@@ -70,5 +70,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['auth', 'checkLink:mtparmada']], function () {
         Route::resource('/mtparmada', 'App\Http\Controllers\Mtparmada\MtparmadaController');
     });
+    
+    Route::group(['middleware' => ['auth', 'checkLink:mtparmada']], function () {
+        Route::resource('/marmada', 'App\Http\Controllers\Marmada\MarmadaController');
+        Route::get('/marmada/gettype/{id}', 'App\Http\Controllers\Marmada\MarmadaController@gettype');
+    });
 });
 #Route::get('/', [MainController::class, 'index']);

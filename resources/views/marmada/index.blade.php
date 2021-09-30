@@ -4,9 +4,9 @@
  <!-- page specific plugin style -->
 @endpush
 
-@section('breadcrumb','Master Type Armada')
-@section('title','Daftar Master Type Armada')
-@section('subTitle','Merupakan halaman daftar master type armada dalam sistem')
+@section('breadcrumb','Master Armada')
+@section('title','Daftar Master Armada')
+@section('subTitle','Merupakan halaman daftar master armada dalam sistem')
 
 @section('container')
 <!-- Main content -->
@@ -17,13 +17,13 @@
         <div class="box-header">
             <div class="clearfix">
                 @if($hakakses['aur']=='1')
-                    <a href="{{url('/mtparmada')}}" class="btn btn-white btn-primary btn-bold">
+                    <a href="{{url('/marmada')}}" class="btn btn-white btn-primary btn-bold">
                         <i class="ace-icon fa fa-folder-open-o bigger-120 blue"></i>
                         Lihat Data
                     </a>
                 @endif
                 @if($hakakses['auc']=='1')
-                    <a href="{{url('/mtparmada/create')}}" class="btn btn-white btn-success btn-bold">
+                    <a href="{{url('/marmada/create')}}" class="btn btn-white btn-success btn-bold">
                             <i class="ace-icon glyphicon glyphicon-plus bigger-120 blue"></i>
                             Tambah Data
                     </a>
@@ -36,18 +36,18 @@
                       <h3 class="box-title">Cari Data :</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <form action="{{ url('/mtparmada')}}" method="head">
+                        <form action="{{ url('/marmada')}}" method="head">
                         @csrf
                             <!-- text input -->
                             <div class="col-sm-12 col-md-3">
                                 <div class="form-group">
-                                    <label>Kode Type :</label>
+                                    <label>Kode :</label>
                                     <input type="text" class="form-control" name="kode">
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <div class="form-group">
-                                    <label>MOT :</label>
+                                    <label>Type Armada :</label>
                                     <input type="text" class="form-control" name="mot">
                                 </div>
                             </div>
@@ -55,6 +55,19 @@
                                 <div class="form-group">
                                     <label>Keterangan :</label>
                                     <input type="text" class="form-control" name="nama">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="form-group">
+                                    <label>Status :</label>
+                                    <select class="form-control" required name='status' id="form-status">
+                                        <option  value="">Silakan Pilih</option>
+                                        <option value="0">Aktif</option>
+                                        <option value="1">Pemeliharaan</option>
+                                        <option value="2">Blokir</option>
+                                        <option value="3">Dijual</option>
+                                        <option value="4">Tidak Aktif</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="box-footer col-sm-12 col-md-12">
@@ -85,14 +98,14 @@
             <thead>
               <tr class="bg-light-blue-gradient">
                 <th width="40" align="center">No</th>
-                <th width="120">Type Armada</th>
+                <th width="120">Kode</th>
                 <th>Keterangan</th>
-                <th width="70">MOT</th>
-                <th width="70">Satuan Berat</th>
-                <th width="90">Berat Kosong</th>
-                <th width="90">Kapasitas Berat</th>
-                <th width="70">Satuan Volume</th>
-                <th width="90">Kapasitas Volume</th>
+                <th width="120">Type</th>
+                <th width="120">No Seri Armada</th>
+                <th width="110">Nomer Polisi</th>
+                <th width="120">Type Plat</th>
+                <th width="120">Merk</th>
+                <th width="100">Status</th>
                 <th width="80" align="center">Action</th>
               </tr>
             </thead>
@@ -100,24 +113,38 @@
                 @foreach($datas as $key => $dt)
                 <tr>
                     <td align="center">{{ $datas->firstItem() + $key }}</td>
-                    <td>{{$dt->vtvtyp}}</td>
-                    <td>{{$dt->vtdesc}}</td>
-                    <td>{{$dt->vtmot}}</td>
-                    <td>{{$dt->vtwuom}}</td>
-                    <td>{{$dt->vteweight}}</td>
-                    <td>{{$dt->vtcweight}}</td>
-                    <td>{{$dt->vtvuom}}</td>
-                    <td>{{$dt->vtcvolume}}</td>
+                    <td>{{$dt->vmvnum}}</td>
+                    <td>{{$dt->vmdesc}}</td>
+                    <td>{{$dt->vmvtyp}}</td>
+                    <td>{{$dt->vmsernum}}</td>
+                    <td>{{$dt->vmplate}}</td>
+                    <td>{{$dt->vmpltype}}</td>
+                    <td>{{$dt->vmbrand}}</td>
+                    <td align="center">
+                        @if($dt->vmouts == '0')
+                            <button class="btn btn-xs btn-success">Aktif</button>
+                        @elseif($dt->vmouts == '1')
+                            <button class="btn btn-xs btn-danger">Pemeliharaan</button>
+                        @elseif($dt->vmouts == '2')
+                            <button class="btn btn-xs btn-danger">Blokir</button>
+                        @elseif($dt->vmouts == '3')
+                            <button class="btn btn-xs btn-danger">Dijual</button>
+                        @elseif($dt->vmouts == '4')
+                            <button class="btn btn-xs btn-danger">Tidak Aktif</button>
+                        @else
+                         
+                        @endif
+                    </td>
                     <td>
                         <div class="hidden-sm hidden-xs action-buttons">
                             @if($hakakses['aur']=='1')
-                                <a class="blue" href="{{url('/mtparmada')}}/{{$dt->vtvtyp}}"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>
+                                <a class="blue" href="{{url('/marmada')}}/{{$dt->vmvehid}}"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>
                             @endif
                             @if($hakakses['auu']=='1')
-                            <a class="green" href="{{ url('/mtparmada')}}/{{$dt->vtvtyp}}/edit"><i class="ace-icon fa fa-pencil bigger-130"></i></a>
+                            <a class="green" href="{{ url('/marmada')}}/{{$dt->vmvehid}}/edit"><i class="ace-icon fa fa-pencil bigger-130"></i></a>
                             @endif
                             @if($hakakses['aud']=='1')
-                            <form action="{{ url('/mtparmada')}}/{{$dt->vtvtyp}}" method="post" class="inline hapus">
+                            <form action="{{ url('/marmada')}}/{{$dt->vmvehid}}" method="post" class="inline hapus">
                                 @method('delete')
                                 @csrf
                                 <button class="red btn-link">

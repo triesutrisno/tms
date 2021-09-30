@@ -14,12 +14,13 @@ class CreateMfvehiTable extends Migration
     public function up()
     {
         Schema::create('mfvehi', function (Blueprint $table) {
-            $table->string('vmvehid',10)->primary()->unique();
-            $table->string('vmdesc',40)->nullable();;
+            $table->bigIncrements('vmvehid')->primary()->unique();
+            $table->string('vmvnum',10)->nullable();
+            $table->string('vmdesc',40)->nullable();
             $table->string('vmsernum',40)->nullable();
             $table->string('vmplate',20)->nullable();
             $table->string('vmpltype',10)->nullable();
-            $table->string('vmframe',40)->nullable();
+            $table->string('vmennum',40)->nullable();
             $table->string('vmbrand',30)->nullable();
             $table->string('vmvown',10)->nullable();
             $table->string('vmbrun',10)->nullable();

@@ -8,6 +8,7 @@ use App\Models\Mtparmada\Mtparmada;
 use App\Models\Mot\Mot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class MtparmadaController extends Controller
 {
@@ -92,7 +93,38 @@ class MtparmadaController extends Controller
      */
     public function show(Mtparmada $mtparmada)
     {
-        //
+        $hakakses = Globalfunction::cekAkses('mtparmada');
+        if($hakakses['aur']=='1'){
+            $data = DB::table('mfvehitype as a')
+                ->select(
+                    'a.vtvtyp',
+                    'a.vtdesc',
+                    'a.vtmot',
+                    'b.mtdesc',
+                    'a.vtwuom',
+                    'a.vteweight',
+                    'a.vtcweight',
+                    'a.vtvuom',
+                    'a.vtcvolume',
+                    'a.vtpuom',
+                    'a.vtcpiece',
+                    'a.vtnaxl',
+                    'a.vtcby',
+                    'a.vtcrby',
+                    'a.created_at',
+                    'a.vtedby',
+                    'a.updated_at',
+                    'a.vtdeby',
+                    'a.deleted_at'
+                )
+                ->leftjoin('mfmot as b', 'b.mtmot', '=', 'a.vtmot') 
+                ->where('a.vtvtyp', '=', $mtparmada->vtvtyp)
+                ->get();
+            #dd($data);
+            return view('mtparmada.show',['datas'=>$data, 'hakakses'=>$hakakses]);
+        }else{
+            return redirect('/401');
+        }
     }
 
     /**

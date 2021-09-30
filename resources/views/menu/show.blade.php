@@ -76,7 +76,7 @@
                       <td class="mailbox-subject">{{ $menu->menu_sort }}</td>
                     </tr>
                     <tr>
-                      <td class="mailbox-name">Crated At</td>
+                      <td class="mailbox-name">Create At</td>
                       <td class="mailbox-star">:</td>
                       <td class="mailbox-subject">{{ $menu->created_at }}</td>
                     </tr>
